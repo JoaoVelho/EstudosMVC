@@ -1,0 +1,16 @@
+@model johnmarket.Models.Estoque
+@{
+    Layout = "_LayoutAdmin";
+}
+<h3>Editar estoque</h3>
+<hr>
+<form class="form-horizontal" asp-controller="Estoque" asp-action="Atualizar" method="POST">
+    <input type="hidden" asp-for="Id">
+    <label asp-for="ProdutoId">Produto</label>
+    <select class="form-control" asp-for="ProdutoId" asp-items='@(new SelectList(@ViewBag.Produtos, "Id", "Nome"))'></select>
+    <br>
+    <label asp-for="Quantidade">Quantidade</label>
+    <input type="number" asp-for="Quantidade" class="form-control" placeholder="Quantidade do produto">
+    <br>
+    <button class="btn btn-success">Atualizar</button>
+</form>

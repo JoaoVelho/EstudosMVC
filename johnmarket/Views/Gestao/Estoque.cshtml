@@ -1,0 +1,51 @@
+@model IEnumerable<johnmarket.Models.Estoque>
+@{
+    Layout = "_LayoutAdmin";
+}
+<h2>Estoque</h2>
+<a asp-controller="Gestao" asp-action="NovoEstoque" class="btn btn-primary">Criar novo estoque</a>
+<hr>
+
+<script>
+    $(document).ready(function () {
+        $('#estoque').DataTable({
+            "info": false,
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Desculpa, nada encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>
+
+<table id="estoque" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estoque in Model) {
+            <tr>
+                <td>@estoque.Id</td>
+                <td>@estoque.Produto.Nome</td>
+                <td>@estoque.Quantidade</td>
+                <td>
+                    <a class="btn btn-success" href="/Gestao/EditarEstoque/@estoque.Id">Editar</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

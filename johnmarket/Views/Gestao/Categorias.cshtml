@@ -1,0 +1,54 @@
+@model IEnumerable<johnmarket.Models.Categoria>
+@{
+    Layout = "_LayoutAdmin";
+}
+<h2>Categorias</h2>
+<a asp-controller="Gestao" asp-action="NovaCategoria" class="btn btn-primary">Criar nova categoria</a>
+<hr>
+
+<script>
+    $(document).ready(function () {
+        $('#categorias').DataTable({
+            "info": false,
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Desculpa, nada encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>
+
+<table id="categorias" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoria in Model) {
+            <tr>
+                <td>@categoria.Id</td>
+                <td>@categoria.Nome</td>
+                <td>
+                    <a class="btn btn-success" href="/Gestao/EditarCategoria/@categoria.Id">Editar</a> 
+
+                    <form asp-controller="Categorias" asp-action="Deletar" method="POST" style="display: inline;">
+                        <input type="hidden" name="id" id="id" value="@categoria.Id">
+                        <button class="btn btn-danger">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
